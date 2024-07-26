@@ -2,31 +2,31 @@ import isTypeof from "../src/isTypeof"
 
 describe("nilEmpty", () => {
     it("target is undefined", () => {
-        expect(isTypeof(undefined, "Undefined")).toBe(true)
+        expect(isTypeof(undefined)).toBe("Undefined")
     })
     it("target is null", () => {
-        expect(isTypeof(null, "Null")).toBe(true)
+        expect(isTypeof(null)).toBe("Null")
     })
     it("target is empty string", () => {
-        expect(isTypeof("", "String")).toBe(true)
+        expect(isTypeof("")).toBe("String")
     })
     it("target is boolean", () => {
-        expect(isTypeof(true, "Boolean")).toBe(true)
-        expect(isTypeof(false, "Boolean")).toBe(true)
+        expect(isTypeof(true)).toBe("Boolean")
+        expect(isTypeof(false)).toBe("Boolean")
     })
     it("target is number", () => {
-        expect(isTypeof(0, "Number")).toBe(true)
-        expect(isTypeof(-0, "Number")).toBe(true)
-        expect(isTypeof(0x36, "Number")).toBe(true)
+        expect(isTypeof(0)).toBe("Number")
+        expect(isTypeof(-0)).toBe("Number")
+        expect(isTypeof(0x36)).toBe("Number")
     })
     it("target is string", () => {
-        expect(isTypeof(" ", "String")).toBe(true)
-        expect(isTypeof("string", "String")).toBe(true)
+        expect(isTypeof(" ")).toBe("String")
+        expect(isTypeof("string")).toBe("String")
     })
     it("target is object", () => {
-        expect(isTypeof({}, "Object")).toBe(true)
-        expect(isTypeof([], "Array")).toBe(true)
-        expect(isTypeof(function() {}, "Function")).toBe(true)
-        expect(isTypeof(() => {}, "Function")).toBe(true)
+        expect(isTypeof({})).toBe("Object")
+        expect(isTypeof([])).toBe("Array")
+        expect(isTypeof(function() {})).toBe("Function")
+        expect(isTypeof(() => {})).toBe("Function")
     })
 })
