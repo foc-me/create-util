@@ -1,6 +1,7 @@
-function isTypeof(target: any, type: string): boolean {
+function isTypeof(target: any): string {
     const targetType = Object.prototype.toString.call(target)
-    return targetType === `[object ${type}]`
+    const match = targetType.match(/^\[object (.*)\]$/)
+    return match ? match[1] : "unkown"
 }
 
 export default isTypeof
