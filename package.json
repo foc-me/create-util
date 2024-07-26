@@ -21,7 +21,7 @@
     "pre-commit": "lint-staged"
   },
   "devDependencies": {
-    "@focme/rollup-plugin-pick": "^0.0.2",
+    "@focme/rollup-plugin-pick": "^0.0.3",
     "@rollup/plugin-terser": "^0.4.3",
     "@rollup/plugin-typescript": "^11.1.3",
     "@types/jest": "^29.5.4",
