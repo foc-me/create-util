@@ -1,6 +1,6 @@
 {
   "name": "@focme/rsk-util",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "a tool lib for rsk-template",
   "main": "index.js",
   "author": "focme",
