@@ -6,6 +6,10 @@
   "author": "focme",
   "license": "MIT",
   "private": true,
+  "repository": {
+      "type": "git",
+      "url": "git+https://github.com/foc-me/rsk-util"
+  },
   "scripts": {
     "build": "rimraf ./dist && tsc && tsc-alias && rollup -c",
     "test": "jest",
