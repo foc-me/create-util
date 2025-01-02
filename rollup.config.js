@@ -5,9 +5,9 @@ const pick = require("@focme/rollup-plugin-pick")
 
 module.exports = {
     input: "./lib/index.ts",
-    output: [
-        { dir: "./dist/esm", format: "esm" },
-        { dir: "./dist/dist", format: "umd", name: "raku" }
+    output: [,
+        { dir: "./dist/dist", format: "cjs" },
+        { dir: "./dist/esm", format: "esm" }
     ],
     plugins: [
         typescript({
@@ -25,7 +25,11 @@ module.exports = {
             "name",
             "version",
             ["main", "dist/index.js"],
-            ["module", "esm/index.js"],
+            ["module", "lib/index.js"],
+            ["exports", {
+                import: "./esm/index.js",
+                default: "./dist/index.js"
+            }],
             ["types", "type"],
             "description",
             "keywords",
