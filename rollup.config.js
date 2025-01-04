@@ -1,6 +1,6 @@
 const typescript = require("@rollup/plugin-typescript")
-const terser = require("@rollup/plugin-terser")
 const copy = require("rollup-plugin-copy")
+const cleanup = require("rollup-plugin-cleanup")
 const pick = require("@focme/rollup-plugin-pick")
 const package = require("./package.json")
 
@@ -22,7 +22,7 @@ module.exports = {
             declaration: false,
             declarationDir: null
         }),
-        terser(),
+        cleanup({ extensions: "ts" }),
         copy({
             targets: [
                 { src: ["./readme.md"], dest: "./dist" }
@@ -31,13 +31,16 @@ module.exports = {
         pick([
             "name",
             "version",
-            ["main", "dist/index.js"],
-            ["module", "lib/index.js"],
+            ["main", "./dist/index.js"],
+            ["module", "./lib/index.js"],
+            ["types", "./type/index.d.ts"],
             ["exports", {
-                import: "./esm/index.js",
-                default: "./dist/index.js"
+                ".": {
+                    types: "./type/index.d.ts",
+                    import: "./esm/index.js",
+                    require: "./dist/index.js"
+                }
             }],
-            ["types", "type"],
             "description",
             "keywords",
             ["files", ["dist", "esm", "lib", "type", "readme.md", "package.json"]],
