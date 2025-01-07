@@ -1,6 +1,6 @@
-# @focme/rsk-util
+# @focme/create-util
 
-a tool lib for rsk-template
+a tool lib for @focme/create-app
 
 ## functions  
 
