@@ -220,3 +220,43 @@ dater.format("YYYY-MM-DD HH:mm:ss") // "2023-09-18 14:49:45"
 |ZZ    |The offset from UTC, ±HHmm           |"+0800"               |
 |Z     |The offset from UTC, ±HH:mm          |"+08:00"              |
 
+### createLimit  
+
+promise limiter
+
+**`createLimit`**  
+param  
+
+* limit: `number`  
+
+returns `{ run, append, remove, on, off }`  
+
+**`Limit.run`**  
+param
+
+* delay: `number`
+
+returns `number`  
+
+```javascript
+const limit = createLimit(4)
+const list = []
+for (let i = 0; i < 10; i++>) {
+    limit.append(() => {
+        const target = new Promise(resolve => {
+            setTimeout(() => {
+                resolve(i)
+            }, 1000)
+        })
+        list.push(target)
+        return target
+    })
+}
+limit.on("finish", () => {
+    console.log("done")
+    Promise.all(list).then(res => {
+        console.log(res)
+    })
+})
+limit.run()
+```
