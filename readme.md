@@ -48,27 +48,26 @@ is.nil({}) // false
 is.nil([]) // false
 ```
 
-### fill  
+### createFill  
 
-**`fill`**  
+**`createFill`**  
 param  
 
-* option: `{ target, length, item, position }`  
-    > `target: string` target string  
+* option: `{ target, length, fill, position }`  
     > `length: number` length of the result  
-    > `item: string` the item filled into target  
+    > `fill: string` the item filled into target  
     > `position: start | end | around` filling position default value `end`  
 
 returns `string`  
 
 ```javascript
-import { fill } from "@focme/rsk-util"
+import { createFill } from "@focme/rsk-util"
 
-fill() // ""
-fill({ length: 10 }) // "          "
-fill({ length: 10, item: "1" }) // "1111111111"
-fill({ target: "6", length: 2, item: "0" }) // "60"
-fill({ target: "6", length: 2, item: "0", position: "start" }) // "06"
+const fillEnd = createFill({ length: 2, fill: "0" })
+fillEnd("6") // "60"
+
+const fillStart = createFill({ length: 2, fill: "0", position: "start" })
+fillEnd("6") // "06"
 ```
 
 ### createCurrent  

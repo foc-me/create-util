@@ -1,14 +1,10 @@
-import fill from "lib/fill/src/fill"
+import createFill from "lib/createFill/src/createFill"
 
 export const keys = /(SSSS|SSS|SS|ss|MM|mm|HH|hh|dd)/
+const fill = createFill({ length: 3, fill: "0", position: "start" })
 
 function createDuration(duration: number) {
-    const millisecond = fill({
-        target: (duration % 1000).toString(),
-        length: 3,
-        item: "0",
-        position: "start"
-    })
+    const millisecond = fill((duration % 1000).toString())
     const fullSecond = Math.floor(duration / 1000)
     const second = fullSecond % 60
     const fullminute = Math.floor(fullSecond / 60)
