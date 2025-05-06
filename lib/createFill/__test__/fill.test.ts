@@ -1,0 +1,40 @@
+import createFill from "../src/createFill"
+
+describe("fill target", () => {
+    it("basic fill", () => {
+        const fill = createFill({ length: 4, fill: "0" })
+        expect(fill("114514")).toBe("114514")
+        expect(fill("4514")).toBe("4514")
+        expect(fill("514")).toBe("5140")
+        expect(fill("14")).toBe("1400")
+        expect(fill("4")).toBe("4000")
+        expect(fill()).toBe("0000")
+    })
+    it("fill in the start", () => {
+        const fill = createFill({ length: 4, fill: "0", position: "start" })
+        expect(fill("114514")).toBe("114514")
+        expect(fill("4514")).toBe("4514")
+        expect(fill("514")).toBe("0514")
+        expect(fill("14")).toBe("0014")
+        expect(fill("4")).toBe("0004")
+        expect(fill()).toBe("0000")
+    })
+    it("fill longer item", () => {
+        const fill = createFill({ length: 4, fill: "1234" })
+        expect(fill("114514")).toBe("114514")
+        expect(fill("4514")).toBe("4514")
+        expect(fill("514")).toBe("5141")
+        expect(fill("14")).toBe("1412")
+        expect(fill("4")).toBe("4123")
+        expect(fill()).toBe("1234")
+    })
+    it("fill around", () => {
+        const fill = createFill({ length: 7, fill: "0", position: "around" })
+        expect(fill("114514")).toBe("1145140")
+        expect(fill("4514")).toBe("0451400")
+        expect(fill("514")).toBe("0051400")
+        expect(fill("14")).toBe("0014000")
+        expect(fill("4")).toBe("0004000")
+        expect(fill()).toBe("0000000")
+    })
+})

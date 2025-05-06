@@ -1,10 +1,10 @@
-import fill from "lib/fill/src/fill"
+import createFill from "lib/createFill/src/createFill"
 import { translate } from "./createDict"
 
 export const keys = /(YYYY|YY|MMMM|MMM|MM|M|DD|D|ddd|dd|d|HH|H|hh|h|mm|m|SSS|ss|s|A|a|ZZ|Z)/
-
-function fillDater(target: string) {
-    return fill({ target, length: 2, item: "0", position: "start" })
+const fill = {
+    two: createFill({ length: 2, fill: "0", position: "start" }),
+    three: createFill({ length: 3, fill: "0", position: "start" })
 }
 
 function provider(date: Date) {
@@ -14,30 +14,25 @@ function provider(date: Date) {
     const monthIndex = (month + 1).toString()
     const fullMonth = translate(month, "month")
     const fullMont = translate(month, "mont")
-    const fullMonthIndex = fillDater(monthIndex)
+    const fullMonthIndex = fill.two(monthIndex)
     const day = date.getDate().toString()
-    const fullDay = fillDater(day)
+    const fullDay = fill.two(day)
     const weekDay = date.getDay()
     const fullWeek = translate(weekDay, "week")
     const fullWee = translate(weekDay, "wee")
     const hour = date.getHours()
-    const fullHour = fillDater(hour.toString())
+    const fullHour = fill.two(hour.toString())
     const pmHour = (hour % 12).toString()
-    const fullPmHour = fillDater(pmHour)
+    const fullPmHour = fill.two(pmHour)
     const minute = date.getMinutes().toString()
-    const fullMinute = fillDater(minute)
+    const fullMinute = fill.two(minute)
     const second = date.getSeconds().toString()
-    const fullSecond = fillDater(second)
-    const millisecond = fill({
-        target: date.getMilliseconds().toString(),
-        length: 3,
-        item: "0",
-        position: "start"
-    })
+    const fullSecond = fill.two(second)
+    const millisecond = fill.three(date.getMilliseconds().toString())
     const apm = hour > 12 ? "pm" : "am"
     const APM = hour > 12 ? "PM" : "AM"
-    const utcHour = fillDater((date.getHours() - date.getUTCHours()).toString())
-    const utcMinute = fillDater((date.getMinutes() - date.getUTCMinutes()).toString())
+    const utcHour = fill.two((date.getHours() - date.getUTCHours()).toString())
+    const utcMinute = fill.two((date.getMinutes() - date.getUTCMinutes()).toString())
     const utc = `+${utcHour}${utcMinute}`
     const UTC = `+${utcHour}:${utcMinute}`
 
